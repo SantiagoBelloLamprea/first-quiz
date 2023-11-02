@@ -20,8 +20,6 @@ swapper = None
 def run_swapper(list_of_tuples):
   return list(map(swapper, list_of_tuples))
 
-a = '';
-b = '';
 def swapper (tuple):
   element1, element2 = tuple
   tuple_change = (element2,element1)
