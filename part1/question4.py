@@ -24,9 +24,17 @@ import pets_db
 
 sql_pets_owned_by_nobody = """
 
-Your SQL here.
+select  animals.name, animals.species,animals.age from animals left join people_animals on 
+animals.animal_id = people_animals.pet_id 
+where people_animals.pet_id is null
 
 """
+pets_db.create_db()
+
+with pets_db.get_connection() as con:
+    res = con.execute(sql_pets_owned_by_nobody)
+    result = res.fetchall()
+    print(result)
 
 # Part 4.B:
 # Write SQL to select how the number of pets are older than their owners. 
@@ -34,15 +42,23 @@ Your SQL here.
 
 sql_pets_older_than_owner = """
 
-Your SQL here.
+select count(people_animals.owner_id) from people_animals inner join 
+people ON people.person_id = people_animals.owner_id inner join
+animals ON animals.animal_id = people_animals.pet_id where animals.age > people.age
 
 """
+
 
 # Part 4.C: BONUS CHALLENGE! 
 # Write SQL to select the pets that are owned by Bessie and nobody else.
 # The output should be a list of tuples in the format: (<person name>, <pet name>, <species>)
 sql_only_owned_by_bessie = """ 
 
-Your SQL here.
+select distinct people.name as pn, animals.name as an, animals.species as ae from people_animals INNER JOIN 
+Animals ON people_animals.pet_id = animals.animal_id INNER JOIN 
+people ON people.person_id = people_animals.owner_id 
+where people.name = 'bessie' and animals.animal_id NOT IN 
+(select pet_id from people_animals inner join
+People ON people_animals.owner_id = people.person_id where people.name <> 'bessie')
 
 """
