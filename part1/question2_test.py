@@ -7,4 +7,4 @@ def test_run_swapper():
 
   assert run_swapper(
     [ (1, 1), ("foo", "bar"), (13, "cows"), (None, "Some") ]
-  ) == [ (1, 1), ("bar", "foo"), ("cows", 13), ("Some", None) ]
+  ) == [ (1, 1), ("bar", "foo"), ("cows", 13), ("Some", None) ] 
