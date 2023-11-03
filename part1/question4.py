@@ -54,7 +54,7 @@ animals ON animals.animal_id = people_animals.pet_id where animals.age > people.
 # The output should be a list of tuples in the format: (<person name>, <pet name>, <species>)
 sql_only_owned_by_bessie = """ 
 
-select distinct people.name as pn, animals.name as an, animals.species as ae from people_animals INNER JOIN 
+select distinct people.name, animals.name, animals.species from people_animals INNER JOIN 
 Animals ON people_animals.pet_id = animals.animal_id INNER JOIN 
 people ON people.person_id = people_animals.owner_id 
 where people.name = 'bessie' and animals.animal_id NOT IN 
